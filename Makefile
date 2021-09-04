@@ -1,5 +1,5 @@
+IMG = sosomasox/setup-volume-content:v1alpha1
 
-docker-build:
-	docker build -t setup-volume-content:arm64 .
-	docker tag setup-volume-content:arm64 sosomasox/setup-volume-content:arm64
-	docker push sosomasox/setup-volume-content:arm64
+docker-buildx:
+	docker run --rm --privileged multiarch/qemu-user-static:register --reset
+	docker buildx build --platform linux/amd64,linux/arm64 -t ${IMG} --push .
